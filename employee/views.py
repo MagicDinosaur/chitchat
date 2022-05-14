@@ -31,6 +31,7 @@ def LoginView(request):
 
         if not user.check_password(password):
             raise AuthenticationFailed('Incorrect password!')
+
         payload = {
             'id': user.id,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
