@@ -18,33 +18,33 @@ def RegisterView(request):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# @api_view(['POST'])
-# @permission_classes([AllowAny, ])
-# def LoginView(request):
-#     if request.method =='POST':
-#         email = request.data['email']
-#         password = request.data['password']
-#
-#         user = User.objects.filter(email=email).first()
-#         if user is None:
-#             raise AuthenticationFailed('User not found!')
-#
-#         if not user.check_password(password):
-#             raise AuthenticationFailed('Incorrect password!')
-#         payload = {
-#             'id': user.id,
-#             'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
-#             'iat': datetime.datetime.utcnow()
-#         }
-#
-#         token = jwt.encode(payload, 'secret', algorithm='HS256').decode('utf-8')
-#         response = Response()
-#
-#         response.set_cookie(key='jwt', value=token, httponly=True)
-#         response.data = {
-#             'jwt': token
-#         }
-#         return response
+@api_view(['POST'])
+@permission_classes([AllowAny, ])
+def LoginView(request):
+    if request.method =='POST':
+        email = request.data['email']
+        password = request.data['password']
+
+        user = UserChat.objects.filter(email=email).first()
+        if user is None:
+            raise AuthenticationFailed('User not found!')
+
+        if not user.check_password(password):
+            raise AuthenticationFailed('Incorrect password!')
+        payload = {
+            'id': user.id,
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
+            'iat': datetime.datetime.utcnow()
+        }
+
+        token = jwt.encode(payload, 'secret', algorithm='HS256')
+        response = Response()
+
+        response.set_cookie(key='jwt', value=token, httponly=True)
+        response.data = {
+            'jwt': token
+        }
+        return response
 # @api_view(['GET'])
 # def UserView(request):
 #     if request.method =='GET':
