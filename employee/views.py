@@ -62,12 +62,13 @@ def UserView(request):
         user = UserChat.objects.filter(id=payload['id']).first()
         serializer = UserSerializer(user)
         return Response(serializer.data)
-# @api_view(['GET'])
-# def LogoutView(request):
-#     if request.method == 'GET':
-#         response = Response()
-#         response.delete_cookie('jwt')
-#         response.data = {
-#             'message': 'success'
-#         }
-#         return response
+
+@api_view(['GET'])
+def LogoutView(request):
+    if request.method == 'GET':
+        response = Response()
+        response.delete_cookie('jwt')
+        response.data = {
+            'message': 'success'
+        }
+        return response
