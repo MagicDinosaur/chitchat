@@ -6,9 +6,10 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserChat
         fields = ['id', 'name', 'email', 'password','phone','avatar','created_at']
-        # extra_kwargs = {
-        #     'password': {'write_only': True}
-        # }
+        #hide pw
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
     #hash password
     def create(self, validated_data):
         password = validated_data.pop('password', None)
