@@ -1,15 +1,19 @@
 
 import './Login.css';
-import React, {Component,useState,useEffect} from 'react';
+import React, {Component, useState, useEffect, useRef} from 'react';
 import {connect} from 'react-redux';
 import {userPostFetch} from 'redux-actions';
 function Login(props) {
   const [time, setTime] = useState((new Date()).toString());
+
+
   useEffect(() => {
     const intervalId = setInterval(() =>{setTime((new Date()).toString())}
     , 1);
     return () => clearInterval(intervalId);
   }, []);
+
+
   return (
   <div>
     <div className="container" id="container">
