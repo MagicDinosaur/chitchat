@@ -7,7 +7,6 @@ function Login(props) {
   const [button, setButton] = useState(true);
   return (
   <div>
-
     <div className={button ? "container" : "container right-panel-active"} id="container">
    {/*Form dang ky*/}
   <div className="form-container sign-up-container">
