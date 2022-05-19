@@ -22,7 +22,6 @@ h1 {
 }
 
 h2 {
-	font-weight: bold;
 	text-align: center;
 }
 
@@ -72,10 +71,7 @@ button.ghost {
 	background-color: transparent;
 	border-color: #FFFFFF;
 }
-button.sign-up-button {
-	background-color: transparent;
-	border-color: #FFFFFF;
-}
+
 form {
 	background-color: #FFFFFF;
 	display: flex;
