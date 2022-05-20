@@ -4,7 +4,6 @@ from django.core.validators import RegexValidator
 class UserChat(AbstractBaseUser):
 
     name = models.CharField(max_length=255)
-
     email = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
     phone = models.CharField(null=True,max_length= 255)
@@ -12,6 +11,6 @@ class UserChat(AbstractBaseUser):
     created_at = models.DateTimeField(auto_now=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = [name, email, password]
     class Meta:
         db_table = "users"

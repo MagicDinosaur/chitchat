@@ -16,6 +16,7 @@ function Login(props) {
       <input type="text" placeholder="Name" />
       <input type="email" placeholder="Email" />
       <input type="password" placeholder="Password" />
+      <input type="password" placeholder="Confirm your password" />
       <button >Sign Up</button>
     </form>
   </div>
@@ -31,7 +32,6 @@ function Login(props) {
       <button>Sign In</button>
     </form>
   </div>
-
 {/*form welcome*/}
   <div className="overlay-container">
     <div className="overlay">
@@ -48,8 +48,6 @@ function Login(props) {
     </div>
   </div>
 </div>
-
-
   </div>
   );
 }
