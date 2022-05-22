@@ -62,7 +62,7 @@ function Login( props ) {
                 <span>Enjoy your endless fun!!!</span>
                 <input type="email" placeholder="Email" value={username} onChange={onChangeUsername}/>
                 <input type="password" placeholder="Password" value={password} onChange={onChangePassword}/>
-                <a href="#">Forgot your password?</a>
+                <a href="#">Forgot your password</a>
                  {/*<input type='submit'/>*/}
                 <button ref={checkBtn}>Sign In</button>
             </form>
