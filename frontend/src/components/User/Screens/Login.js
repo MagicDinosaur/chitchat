@@ -59,7 +59,7 @@ function Login( props ) {
             <form onSubmit={handleLogin} ref={form}>
                 {/*<p>Testing time: {time} </p>*/}
                 <h1>Sign in</h1>
-                <span>Enjoy your endless fun!</span>
+                <span>Enjoy your endless fun!!</span>
                 <input type="email" placeholder="Email" value={username} onChange={onChangeUsername}/>
                 <input type="password" placeholder="Password" value={password} onChange={onChangePassword}/>
                 <a href="#">Forgot your password?</a>
