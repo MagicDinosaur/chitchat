@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = "";
+const API_URL = "http://127.0.0.1:8000/";
 const register = ( username , email , password ) => {
     return axios.post ( API_URL + "user/register/" , {
         username ,
@@ -10,8 +10,8 @@ const register = ( username , email , password ) => {
 };
 
 const login = ( email , password ) => {
-    return axios.post ( API_URL + "user/login/" , {
-        email ,
+    return axios.post( API_URL + "user/login/" , {
+        email,
         password ,
     } ).then ( ( response ) => {
         if (response.data.accessToken) {

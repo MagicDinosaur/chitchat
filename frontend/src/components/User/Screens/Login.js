@@ -20,12 +20,28 @@ function Login( props ) {
         const password = e.target.value;
         setPassword ( password );
     };
-    const handleLogin = ( e ) => {
-        e.preventDefault ();
-        setLoading ( true );
-        form.current.validateAll ();
-        if (checkBtn.current.context._errors.length === 0) {
-            dispatch ( login ( username , password ) )
+    // const handleLogin = ( e ) => {
+    //     e.preventDefault ();
+    //     setLoading ( true );
+    //     // form.current.validateAll ();
+    //     if (checkBtn.current.context._errors.length === 0) {
+    //         dispatch ( login ( username , password ) )
+    //             .then ( () => {
+    //                 props.history.push ( "/profile" );
+    //                 window.location.reload ();
+    //             } )
+    //             .catch ( () => {
+    //                 setLoading ( false );
+    //             } );
+    //     } else {
+    //         setLoading ( false );
+    //     }
+    // };
+
+
+    const handleLogin = e => {
+        e.preventDefault()
+        dispatch ( login ( username , password ) )
                 .then ( () => {
                     props.history.push ( "/profile" );
                     window.location.reload ();
@@ -33,13 +49,10 @@ function Login( props ) {
                 .catch ( () => {
                     setLoading ( false );
                 } );
-        } else {
-            setLoading ( false );
-        }
-    };
+    }
     if (isLoggedIn) {
         // return <Redirect to="google.com" />;
-        alert ( "Logged In" )
+        alert( "Logged In" );
     }
     return (
         <div className="form-container sign-in-container">
@@ -50,7 +63,8 @@ function Login( props ) {
                 <input type="email" placeholder="Email" value={username} onChange={onChangeUsername}/>
                 <input type="password" placeholder="Password" value={password} onChange={onChangePassword}/>
                 <a href="#">Forgot your password?</a>
-                <button>Sign In</button>
+                 {/*<input type='submit'/>*/}
+                <button ref={checkBtn}>Sign In</button>
             </form>
         </div>
     )
