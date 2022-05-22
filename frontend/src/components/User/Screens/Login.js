@@ -52,7 +52,7 @@ function Login( props ) {
     }
     if (isLoggedIn) {
         // return <Redirect to="google.com" />;
-        alert( "Logged In" );
+        alert( "Logged In!!!!" );
     }
     return (
         <div className="form-container sign-in-container">
