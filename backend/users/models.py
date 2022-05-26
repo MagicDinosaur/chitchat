@@ -2,7 +2,7 @@ from uuid import uuid4
 
 from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
-
+from django.conf import settings
 
 class UserChat(AbstractBaseUser):
     name = models.CharField(max_length=255)
@@ -42,13 +42,13 @@ class TrackDate(models.Model):
 
 class ChatRoom(TrackDate):
     """ A Chat Room with owner and uri """
-    owner = models.ForeignKey(UserChat, on_delete=models.PROTECT)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     uri = models.URLField(default=generate_chat_uri())
 
 
 class ChatRoomMessage(TrackDate):
     """Store messages."""
-    user = models.ForeignKey(UserChat, on_delete=models.PROTECT)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     chat_room = models.ForeignKey(ChatRoom, related_name="messages", on_delete=models.PROTECT)
     message = models.TextField(max_length=2000)
 
@@ -61,5 +61,6 @@ class ChatRoomMessage(TrackDate):
 class ChatRoomMember(TrackDate):
 
     chat_room = models.ForeignKey(ChatRoom, related_name="members",on_delete=models.PROTECT)
-    user = models.ForeignKey(UserChat,on_delete=models.PROTECT)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT)
+
 
