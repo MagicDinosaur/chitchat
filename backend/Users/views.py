@@ -46,6 +46,7 @@ def LoginView(request):
             'jwt': token
         }
         return response
+
 @api_view(['GET'])
 def UserView(request):
     if request.method =='GET':
@@ -72,3 +73,5 @@ def LogoutView(request):
             'message': 'success'
         }
         return response
+
+

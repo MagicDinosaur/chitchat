@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'phonenumber_field',
-    'employee',
+    'Users',
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'crud_practice.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'employee',
+        'NAME': 'Users',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
@@ -129,7 +129,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-AUTH_USER_MODEL = 'employee.UserChat'
+AUTH_USER_MODEL = 'Users.UserChat'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 

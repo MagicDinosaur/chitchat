@@ -4,8 +4,8 @@ import {useDispatch , useSelector} from "react-redux";
 import {login} from "../../../actions/auth";
 
 function Login( props ) {
-    const form = useRef ();
-    const checkBtn = useRef ();
+    const form = useRef();
+    const checkBtn = useRef();
     const [username , setUsername] = useState ( "" );
     const [password , setPassword] = useState ( "" );
     const [loading , setLoading] = useState ( false );
@@ -44,7 +44,7 @@ function Login( props ) {
         dispatch ( login ( username , password ) )
                 .then ( () => {
                     props.history.push ( "/profile" );
-                    window.location.reload ();
+                    window.location.reload();
                 } )
                 .catch ( () => {
                     setLoading ( false );
