@@ -41,4 +41,25 @@ class TrackDate(models.Model):
 
 
 class ChatRoom(TrackDate):
+    """ A Chat Room with owner and uri """
     owner = models.ForeignKey(UserChat, on_delete=models.PROTECT)
+    uri = models.URLField(default=generate_chat_uri())
+
+
+class ChatRoomMessage(TrackDate):
+    """Store messages."""
+    user = models.ForeignKey(UserChat, on_delete=models.PROTECT())
+    chat_room = models.ForeignKey(ChatRoom, related_name="messages", on_delete=models.PROTECT())
+    message = models.TextField(max_length=2000)
+
+    def converse_info(self):
+        return {
+            'user': preserialize_user(self.user),
+            'message': self.message
+        }
+
+class ChatRoomMember(TrackDate):
+
+    chat_room = models.ForeignKey(ChatRoom, related_name="members",on_delete=models.PROTECT())
+    user = models.ForeignKey(UserChat,on_delete=models.PROTECT())
+
