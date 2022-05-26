@@ -109,3 +109,34 @@ class ChatView(APIView):
             'message' : user.name + 'has joined the chat',
             'user' : get_user_info(user)
         })
+
+class ChatMessageView(APIView):
+    """Make/Get message"""
+    permissions_classes = (permissions.IsAuthenticated,)
+    def get(self,request, *args , **kwargs):
+        """ger all messages in a room"""
+        uri = kwargs['uri']
+        chat_room = ChatRoom.objects.get(uri=uri)
+        messages =[message.to_json() for message in chat_room.messages.all()]
+
+        return Response({
+            'id': chat_room.id, 'uri': chat_room.uri,
+            'messages': messages
+        })
+    def post(self,request,*args,**kwargs):
+        """send a new message in chat room"""
+        uri = kwargs['uri']
+        message = request.data['message']
+
+        user = request.user
+        chat_room = ChatRoom.objects.get(uri=uri)
+
+        ChatRoomMessage.objects.create(
+            user = user,
+            chat_room = chat_room,
+            message = message
+        )
+        return Response ({
+            'status': 'SUCCESS', 'uri': chat_room.uri, 'message': message,
+            'user': get_user_info(user)
+        })
