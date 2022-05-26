@@ -37,7 +37,7 @@ class TrackDate(models.Model):
     update_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        abstracy = True
+        abstract = True
 
 
 class ChatRoom(TrackDate):
@@ -48,8 +48,8 @@ class ChatRoom(TrackDate):
 
 class ChatRoomMessage(TrackDate):
     """Store messages."""
-    user = models.ForeignKey(UserChat, on_delete=models.PROTECT())
-    chat_room = models.ForeignKey(ChatRoom, related_name="messages", on_delete=models.PROTECT())
+    user = models.ForeignKey(UserChat, on_delete=models.PROTECT)
+    chat_room = models.ForeignKey(ChatRoom, related_name="messages", on_delete=models.PROTECT)
     message = models.TextField(max_length=2000)
 
     def converse_info(self):
@@ -60,6 +60,6 @@ class ChatRoomMessage(TrackDate):
 
 class ChatRoomMember(TrackDate):
 
-    chat_room = models.ForeignKey(ChatRoom, related_name="members",on_delete=models.PROTECT())
-    user = models.ForeignKey(UserChat,on_delete=models.PROTECT())
+    chat_room = models.ForeignKey(ChatRoom, related_name="members",on_delete=models.PROTECT)
+    user = models.ForeignKey(UserChat,on_delete=models.PROTECT)
 
