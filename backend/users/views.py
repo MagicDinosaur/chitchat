@@ -2,11 +2,12 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
-from .models import UserChat
+from .models import (UserChat, ChatRoom, ChatRoomMessage, ChatRoomMember, get_user_info)
 from .serializers import UserSerializer
 from rest_framework.exceptions import AuthenticationFailed
 import jwt, datetime
-
+from rest_framework.views import APIView
+from rest_framework import permissions
 
 @api_view(['POST'])
 def RegisterView(request):
@@ -75,3 +76,36 @@ def LogoutView(request):
         return response
 
 
+class ChatView(APIView):
+    permissions_classes = (permissions.IsAuthenticated,)
+    def post(self,request,*args, **kwargs):
+        """create new chat room"""
+        user = request.user
+        chat_room = ChatRoom.objects.create(owner = user)
+
+        return Response({
+            'status' : 'SUCCESS', 'uri': chat_room.uri,
+            'message' : 'New room created'
+        })
+    def patch(self,request,*args, **kwargs):
+        """add new user into room"""
+        uri = kwargs['uri']
+        usermail = request.data['email']
+        user = UserChat.objects.get(email=usermail)
+
+        chat_room = ChatRoom.objects.get(uri = uri)
+        owner = chat_room.owner
+        if(owner != user):
+            chat_room.members.get_or_create(
+                user = user, chat_room = chat_room
+            )
+        owner = get_user_info(owner)
+        members = [
+            get_user_info(chat_room.user) for chat_room in chat_room.members.all()
+        ]
+        members.insert(0,owner)
+        return Response({
+            'status' :'SUCCESS', 'members':members,
+            'message' : user.name + 'has joined the chat',
+            'user' : get_user_info(user)
+        })

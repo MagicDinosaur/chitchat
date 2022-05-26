@@ -19,7 +19,7 @@ class UserChat(AbstractBaseUser):
         db_table = "users"
 
 
-def preserialize_user(user):
+def get_user_info(user):
     return {
         'id': user.id, 'username': user.name, 'email': user.email,
         # 'first_name': user.first_name, 'last_name': user.last_name
@@ -54,7 +54,7 @@ class ChatRoomMessage(TrackDate):
 
     def converse_info(self):
         return {
-            'user': preserialize_user(self.user),
+            'user': get_user_info(self.user),
             'message': self.message
         }
 
