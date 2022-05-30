@@ -3,7 +3,7 @@ from uuid import uuid4
 from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
 from django.conf import settings
-
+from django.contrib.auth.models import UserManager
 class UserChat(AbstractBaseUser):
     name = models.CharField(max_length=255)
     email = models.CharField(max_length=255, unique=True)
@@ -14,7 +14,7 @@ class UserChat(AbstractBaseUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [name, email, password]
-
+    objects = UserManager()
     class Meta:
         db_table = "users"
 

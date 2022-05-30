@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from .models import UserChat
+from .models import UserChat, ChatRoomMessage, ChatRoom
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,4 +18,8 @@ class UserSerializer(serializers.ModelSerializer):
             user.set_password(password)
         user.save()
         return user
-
+class MessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model =  ChatRoom
+        fields = ['owner','uri']
+        #hide pw
