@@ -1,17 +1,16 @@
+import jwt
+from rest_framework import permissions
 from rest_framework import status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
-from .models import (UserChat, ChatRoom, ChatRoomMessage, ChatRoomMember, get_user_info)
-from .serializers import UserSerializer, MessageSerializer
-from rest_framework.exceptions import AuthenticationFailed
-import jwt, datetime
 from rest_framework.views import APIView
-from rest_framework import permissions
-from django.core import serializers
-from django.forms.models import model_to_dict
 
-import json
+from .models import (UserChat, ChatRoom, ChatRoomMessage, get_user_info)
+from .serializers import UserSerializer
+
+
 @api_view(['POST'])
 @permission_classes([AllowAny, ])
 def RegisterView(request):
