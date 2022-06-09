@@ -1,22 +1,22 @@
-import { apiRequest } from "../actions/api";
-import { LOGIN } from "../actions/auth";
+import axios from "axios";
+import { API_REQUEST, apiError, apiSuccess } from "../actions/api";
+import { setLoader } from "../actions/ui";
 
-const SERVER_URL = `https://61m46.sse.codesandbox.io`;
-
-export const appMiddleware = () => next => action => {
+export const apiMiddleware = ({ dispatch }) => next => action => {
   next(action);
-  switch (action.type) {
-    case LOGIN: {
-      next(
-        apiRequest({
-          url: `${SERVER_URL}/login`,
-          method: "POST",
-          data: action.payload
-        })
-      );
-      break;
-    }
-    default:
-      break;
+
+  if (action.type === API_REQUEST) {
+    dispatch(setLoader(true));
+    const { url, method, data } = action.meta;
+    axios({
+      method,
+      url,
+      data
+    })
+      .then(({ data }) => dispatch(apiSuccess({ response: data })))
+      .catch(error => {
+        console.log(error);
+        dispatch(apiError({ error: error.response.data }));
+      });
   }
 };

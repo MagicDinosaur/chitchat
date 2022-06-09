@@ -1,7 +1,7 @@
 import { apiRequest } from "../actions/api";
 import { LOGIN } from "../actions/auth";
 
-const SERVER_URL = ``;
+const SERVER_URL = 'localhost';
 
 export const appMiddleware = () => next => action => {
   next(action);
