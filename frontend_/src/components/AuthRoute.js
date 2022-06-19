@@ -10,6 +10,7 @@ const AuthRoute = props => {
   return <Route {...props} />;
 };
 
+
 const mapStateToProps = ({ isAuthUser }) => ({
   isAuthUser
 });
